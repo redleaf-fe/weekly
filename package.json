@@ -1,0 +1,15 @@
+{
+  "name": "week",
+  "version": "1.0.0",
+  "description": "每周记录前端技术文章",
+  "main": "docsify.js",
+  "scripts": {
+    "start": "nodemon ./index.js > pm2.log &"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "docsify-cli": "^4.4.2"
+  }
+}
