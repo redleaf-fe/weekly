@@ -34,6 +34,9 @@
         width: 300px;
         border-right: 1px solid #ddd;
         transition: all 0.3s;
+        position: relative;
+        top: 0;
+        left: 0;
       }
       .sidebar a {
         display: block;
@@ -70,6 +73,23 @@
         margin-bottom: 20px;
         color: #38f;
       }
+      .menu,
+      .git {
+        display: inline-block;
+        position: fixed;
+        left: 10px;
+        width: 30px;
+        height: 30px;
+        background-size: cover;
+      }
+      .menu {
+        bottom: 40px;
+        background-image: url(https://gw.alicdn.com/imgextra/i4/O1CN01bGpYas26bwpp1BjYU_!!6000000007681-2-tps-200-200.png);
+      }
+      .git {
+        bottom: 80px;
+        background-image: url(https://gw.alicdn.com/imgextra/i3/O1CN01FR6tnr22zWlJ9XbSa_!!6000000007191-2-tps-200-200.png);
+      }
     </style>
     <style>
       @media screen and (max-width: 768px) {
@@ -87,15 +107,6 @@
         .content p {
           max-width: calc(100% - 60px);
         }
-        .menu {
-          position: fixed;
-          bottom: 40px;
-          left: 10px;
-          width: 30px;
-          height: 30px;
-          background-image: url(https://gw.alicdn.com/imgextra/i4/O1CN01bGpYas26bwpp1BjYU_!!6000000007681-2-tps-200-200.png);
-          background-size: cover;
-        }
       }
     </style>
   </head>
@@ -105,10 +116,11 @@
       {{sidebar | safe}}
     </div>
     <div class="content">{{content | safe}}</div>
+    <a class="git" href="https://github.com/redleaf-fe/weekly" target="_blank"></a>
     <div class="menu"></div>
 
     <script>
-      let sidebarShow = false;
+      let sidebarShow = /Mobile/ig.test(navigator.userAgent) ? false : true;
       document.querySelector(".menu").addEventListener("click", () => {
         if (sidebarShow) {
           document.querySelector(".sidebar").style.left = "-300px";
