@@ -1,23 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="./docsify.css">
-</head>
-<body>
-  <div id="app"></div>
-  <script>
-    window.$docsify = {
-      name: '前端小报',
-      repo: '',
-      loadSidebar: true,
-    }
-  </script>
-  <!-- Docsify v4 -->
-  <script src="./docsify.js"></script>
-</body>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>前端小报</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <style>
+      body {
+        margin: 0;
+        background-color: white;
+      }
+      a {
+        text-decoration: none;
+        color: #333;
+        cursor: pointer;
+      }
+      p {
+        margin: 0;
+      }
+      .sidebar,
+      .content {
+        display: inline-block;
+        height: 100vh;
+        overflow: auto;
+        background-color: white;
+      }
+      .sidebar {
+        padding-top: 16px;
+        width: 300px;
+        border-right: 1px solid #ddd;
+        transition: all 0.3s;
+      }
+      .sidebar a {
+        display: block;
+        margin-bottom: 8px;
+        margin-left: 40px;
+        font-size: 14px;
+        color: #38f;
+      }
+      .sidebar .header {
+        color: #333;
+        margin-left: 80px;
+        font-size: 22px;
+        line-height: 40px;
+      }
+      .content {
+        width: calc(100vw - 310px);
+      }
+      .content .year {
+        font-size: 60px;
+        color: #38f;
+        margin-left: 60px;
+        margin-bottom: 40px;
+      }
+      .content .date {
+        display: block;
+      }
+      .content a,
+      .content p {
+        font-size: 18px;
+        margin-left: 60px;
+      }
+      .content a {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #38f;
+      }
+    </style>
+    <style>
+      @media screen and (max-width: 768px) {
+        .sidebar {
+          position: fixed;
+          top: 0;
+          left: -300px;
+        }
+        .content {
+          width: 100vw;
+          overflow-wrap: break-word;
+          word-break: break-all;
+        }
+        .content a,
+        .content p {
+          max-width: calc(100% - 60px);
+        }
+        .menu {
+          position: fixed;
+          bottom: 40px;
+          left: 10px;
+          width: 30px;
+          height: 30px;
+          background-image: url(https://gw.alicdn.com/imgextra/i4/O1CN01bGpYas26bwpp1BjYU_!!6000000007681-2-tps-200-200.png);
+          background-size: cover;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <a class="header" href="/">前端小报</a>
+      {{sidebar | safe}}
+    </div>
+    <div class="content">{{content | safe}}</div>
+    <div class="menu"></div>
+
+    <script>
+      let sidebarShow = false;
+      document.querySelector(".menu").addEventListener("click", () => {
+        if (sidebarShow) {
+          document.querySelector(".sidebar").style.left = "-300px";
+        } else {
+          document.querySelector(".sidebar").style.left = "0";
+        }
+        sidebarShow = !sidebarShow;
+      });
+    </script>
+  </body>
 </html>

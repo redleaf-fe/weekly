@@ -1,8 +1,7 @@
 {
-  "name": "week",
+  "name": "weekly",
   "version": "1.0.0",
-  "description": "每周记录前端技术文章",
-  "main": "docsify.js",
+  "description": "",
   "scripts": {
     "start": "nodemon ./index.js > pm2.log &"
   },
@@ -10,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "docsify-cli": "^4.4.2"
+    "koa": "^2.11.0",
+    "koa-router": "^10.0.0",
+    "markdown": "^0.5.0",
+    "nunjucks": "^3.2.2"
   }
 }
