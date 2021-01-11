@@ -26,9 +26,12 @@ function getDateDir(year) {
   });
 }
 
-function genSidebar(dir) {
+function genSidebar(dir, className) {
   return dir
-    .map((v) => `<a target="_self" href="/weekly${v.link}">${v.text}</a>`)
+    .map(
+      (v) =>
+        `<a target="_self" class="${className}" href="/weekly${v.link}">${v.text}</a>`
+    )
     .join("");
 }
 
@@ -54,14 +57,16 @@ router.get("/:year?/:date?", (ctx, next) => {
   } else if (year) {
     ctx.body = nunjucks.renderString(getTempl(), {
       sidebar: genSidebar(getYearDir()),
-      content: `<div class="year">${year}</div>${getDateDir(year)
-        .map((v, k) => `<a class="date" target="_self" href="/weekly${v.link}">${v.text}</a>`)
-        .join("")}`,
+      content: `<div class="year">${year}</div>${genSidebar(
+        getDateDir(year),
+        "date"
+      )}`,
     });
   } else {
+    const yearDir = getYearDir();
     ctx.body = nunjucks.renderString(getTempl(), {
-      sidebar: genSidebar(getYearDir()),
-      content: `<div class="year">redleaf weekly</div>`,
+      sidebar: genSidebar(yearDir),
+      content: `<div class="year">前端小报</div>${genSidebar(yearDir, "date")}`,
     });
   }
 });

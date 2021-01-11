@@ -13,6 +13,9 @@
       body {
         margin: 0;
         background-color: white;
+        font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+          monospace;
+        font-size: 0;
       }
       a {
         text-decoration: none;
@@ -24,6 +27,7 @@
       }
       .sidebar,
       .content {
+        box-sizing: border-box;
         display: inline-block;
         height: 100vh;
         overflow: auto;
@@ -52,7 +56,7 @@
         line-height: 40px;
       }
       .content {
-        width: calc(100vw - 310px);
+        width: calc(100% - 300px);
       }
       .content .year {
         font-size: 60px;
@@ -83,7 +87,7 @@
         background-size: cover;
       }
       .menu {
-        bottom: 40px;
+        bottom: -40px;
         background-image: url(https://gw.alicdn.com/imgextra/i4/O1CN01bGpYas26bwpp1BjYU_!!6000000007681-2-tps-200-200.png);
       }
       .git {
@@ -99,13 +103,16 @@
           left: -300px;
         }
         .content {
-          width: 100vw;
+          width: 100%;
           overflow-wrap: break-word;
           word-break: break-all;
         }
         .content a,
         .content p {
           max-width: calc(100% - 60px);
+        }
+        .menu {
+          bottom: 40px;
         }
       }
     </style>
@@ -116,11 +123,15 @@
       {{sidebar | safe}}
     </div>
     <div class="content">{{content | safe}}</div>
-    <a class="git" href="https://github.com/redleaf-fe/weekly" target="_blank"></a>
+    <a
+      class="git"
+      href="https://github.com/redleaf-fe/weekly"
+      target="_blank"
+    ></a>
     <div class="menu"></div>
 
     <script>
-      let sidebarShow = /Mobile/ig.test(navigator.userAgent) ? false : true;
+      let sidebarShow = /Mobile/gi.test(navigator.userAgent) ? false : true;
       document.querySelector(".menu").addEventListener("click", () => {
         if (sidebarShow) {
           document.querySelector(".sidebar").style.left = "-300px";
