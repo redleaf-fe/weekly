@@ -6,6 +6,8 @@ const md = require("markdown").markdown;
 const koa = require("koa");
 const router = require("koa-router")();
 
+const pkg = require("./package.json");
+
 const app = new koa();
 
 function getTempl() {
@@ -73,4 +75,4 @@ router.get("/:year?/:date?", (ctx, next) => {
 
 app.use(router.routes());
 
-app.listen(3009);
+app.listen(pkg.port);

@@ -2,8 +2,9 @@
   "name": "weekly",
   "version": "1.0.0",
   "description": "",
+  "port": 3009,
   "scripts": {
-    "start": "nodemon ./index.js > pm2.log &"
+    "start": "nodemon ./index.js > weekly.log &"
   },
   "keywords": [],
   "author": "",
