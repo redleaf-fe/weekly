@@ -77,7 +77,8 @@
         color: #38f;
       }
       .menu,
-      .git {
+      .git,
+      .home {
         display: inline-block;
         position: fixed;
         left: 10px;
@@ -92,6 +93,10 @@
       .git {
         bottom: 80px;
         background-image: url(https://gw.alicdn.com/imgextra/i3/O1CN01FR6tnr22zWlJ9XbSa_!!6000000007191-2-tps-200-200.png);
+      }
+      .home {
+        bottom: 120px;
+        background-image: url(https://gw.alicdn.com/imgextra/i2/O1CN01cdqgE91nQ3rGws49A_!!6000000005083-2-tps-200-200.png);
       }
     </style>
     <style>
@@ -122,6 +127,7 @@
       {{sidebar | safe}}
     </div>
     <div class="content">{{content | safe}}</div>
+    <a class="home" href="/" target="_self"></a>
     <a
       class="git"
       href="https://github.com/redleaf-fe/weekly"
