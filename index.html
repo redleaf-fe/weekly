@@ -1,155 +1,242 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>前端小报</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="Description" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
-    />
-    <link
-      rel="shortcut icon"
-      href="https://gw.alicdn.com/imgextra/i3/O1CN01s3UDzQ1t5LdrmxVwF_!!6000000005850-2-tps-200-200.png"
-      type="image/x-icon"
-    />
-    <style>
-      body {
-        margin: 0;
-        background-color: white;
-        font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
-          monospace;
-        font-size: 0;
-        color: #333;
-      }
-      a {
-        text-decoration: none;
-        cursor: pointer;
-      }
-      p {
-        margin: 0;
-      }
-      .sidebar,
-      .content {
-        box-sizing: border-box;
-        display: inline-block;
-        height: 100vh;
-        overflow: auto;
-        background-color: white;
-      }
+
+<head>
+  <meta charset="UTF-8" />
+  <title>前端小报</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+  <link rel="shortcut icon"
+    href="https://gw.alicdn.com/imgextra/i3/O1CN01s3UDzQ1t5LdrmxVwF_!!6000000005850-2-tps-200-200.png"
+    type="image/x-icon" />
+  <style>
+    body {
+      margin: 0;
+      background-color: white;
+      font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+        monospace;
+      font-size: 0;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .searchbar,
+    .sidebar,
+    .content {
+      box-sizing: border-box;
+      display: inline-block;
+      height: 100vh;
+      overflow: auto;
+      background-color: white;
+    }
+
+    .searchbar,
+    .sidebar {
+      padding-top: 16px;
+      width: 300px;
+      border-right: 1px solid #ddd;
+      transition: all 0.3s;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .searchbar {
+      left: -100%;
+      padding: 0 40px;
+    }
+
+    .searchbar a,
+    .sidebar a {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #38f;
+      text-align: center;
+    }
+
+    .searchbar .header,
+    .sidebar .header {
+      color: #333;
+      font-size: 22px;
+      line-height: 40px;
+    }
+
+    .content {
+      margin-left: 300px;
+      width: calc(100% - 300px);
+    }
+
+    .content .year {
+      font-size: 50px;
+      margin-left: 60px;
+      margin-bottom: 40px;
+    }
+
+    .content .date {
+      display: block;
+    }
+
+    .content a,
+    .content p {
+      font-size: 18px;
+      margin-left: 60px;
+    }
+
+    .content a {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #38f;
+    }
+
+    .search-input,
+    .search-btn {
+      height: 20px;
+      display: inline-block;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 1px;
+    }
+
+    .search-input {
+      width: 150px;
+      margin-right: 20px;
+    }
+
+    .search-result {
+      font-size: 14px;
+    }
+
+    .menu,
+    .git,
+    .home,
+    .search {
+      display: inline-block;
+      position: fixed;
+      left: 10px;
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+    }
+
+    .menu {
+      bottom: 40px;
+      background-image: url(https://gw.alicdn.com/imgextra/i4/O1CN01bGpYas26bwpp1BjYU_!!6000000007681-2-tps-200-200.png);
+    }
+
+    .git {
+      bottom: 80px;
+      background-image: url(https://gw.alicdn.com/imgextra/i3/O1CN01FR6tnr22zWlJ9XbSa_!!6000000007191-2-tps-200-200.png);
+    }
+
+    .home {
+      bottom: 120px;
+      background-image: url(https://gw.alicdn.com/imgextra/i2/O1CN01cdqgE91nQ3rGws49A_!!6000000005083-2-tps-200-200.png);
+    }
+
+    .search {
+      bottom: 160px;
+      background-image: url(https://gw.alicdn.com/imgextra/i1/O1CN017kRkwm1Y5i1QnJJCK_!!6000000003008-2-tps-200-200.png);
+    }
+  </style>
+  <style>
+    @media screen and (max-width: 768px) {
+
+      .searchbar,
       .sidebar {
-        padding-top: 16px;
-        width: 300px;
-        border-right: 1px solid #ddd;
-        transition: all 0.3s;
-        position: relative;
-        top: 0;
-        left: 0;
+        left: -100%;
+        width: 100%;
       }
-      .sidebar a {
-        display: block;
-        margin-bottom: 8px;
-        margin-left: 40px;
-        font-size: 14px;
-        color: #38f;
-      }
-      .sidebar .header {
-        color: #333;
-        margin-left: 80px;
-        font-size: 22px;
-        line-height: 40px;
-      }
+
       .content {
-        width: calc(100% - 300px);
+        margin-left: 0;
+        width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-all;
       }
-      .content .year {
-        font-size: 50px;
-        margin-left: 60px;
-        margin-bottom: 40px;
-      }
-      .content .date {
-        display: block;
-      }
+
       .content a,
       .content p {
-        font-size: 18px;
-        margin-left: 60px;
+        max-width: calc(100% - 60px);
       }
-      .content a {
-        display: inline-block;
-        margin-bottom: 20px;
-        color: #38f;
-      }
-      .menu,
-      .git,
-      .home {
-        display: inline-block;
-        position: fixed;
-        left: 10px;
-        width: 30px;
-        height: 30px;
-        background-size: cover;
-      }
-      .menu {
-        bottom: -40px;
-        background-image: url(https://gw.alicdn.com/imgextra/i4/O1CN01bGpYas26bwpp1BjYU_!!6000000007681-2-tps-200-200.png);
-      }
-      .git {
-        bottom: 80px;
-        background-image: url(https://gw.alicdn.com/imgextra/i3/O1CN01FR6tnr22zWlJ9XbSa_!!6000000007191-2-tps-200-200.png);
-      }
-      .home {
-        bottom: 120px;
-        background-image: url(https://gw.alicdn.com/imgextra/i2/O1CN01cdqgE91nQ3rGws49A_!!6000000005083-2-tps-200-200.png);
-      }
-    </style>
-    <style>
-      @media screen and (max-width: 768px) {
-        .sidebar {
-          position: fixed;
-          top: 0;
-          left: -300px;
-        }
-        .content {
-          width: 100%;
-          overflow-wrap: break-word;
-          word-break: break-all;
-        }
-        .content a,
-        .content p {
-          max-width: calc(100% - 60px);
-        }
-        .menu {
-          bottom: 40px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="sidebar">
-      <a class="header" href="/weekly/">前端小报</a>
-      {{sidebar | safe}}
-    </div>
-    <div class="content">{{content | safe}}</div>
-    <a class="home" href="/" target="_self"></a>
-    <a
-      class="git"
-      href="https://github.com/redleaf-fe/weekly"
-      target="_blank"
-    ></a>
-    <div class="menu"></div>
+    }
+  </style>
+</head>
 
-    <script>
-      let sidebarShow = /Mobile/gi.test(navigator.userAgent) ? false : true;
-      document.querySelector(".menu").addEventListener("click", () => {
-        if (sidebarShow) {
-          document.querySelector(".sidebar").style.left = "-300px";
-        } else {
-          document.querySelector(".sidebar").style.left = "0";
-        }
-        sidebarShow = !sidebarShow;
+<body>
+  <!-- 左边栏 -->
+  <div class="sidebar">
+    <a class="header" href="/weekly/">前端小报</a>
+    {{sidebar | safe}}
+  </div>
+
+  <div class="searchbar">
+    <a class="header" href="/weekly/">前端小报</a>
+    <div>
+      <input class="search-input" />
+      <button class="search-btn">搜索</button>
+    </div>
+    <div class="search-result">
+    </div>
+  </div>
+
+  <!-- 中间内容 -->
+  <div class="content">{{content | safe}}</div>
+
+  <!-- 侧边icon区域 -->
+  <div class="search"></div>
+  <a class="home" href="/" target="_self"></a>
+  <a class="git" href="https://github.com/redleaf-fe/weekly" target="_blank"></a>
+  <div class="menu"></div>
+
+  <script>
+    let isMobile = /Mobile/gi.test(navigator.userAgent);
+    const show = {
+      sidebar: !isMobile,
+      searchbar: false,
+    }
+
+    function changeShow(key) {
+      if (show[key]) {
+        document.querySelector(`.${key}`).style.left = "-100%";
+      } else {
+        // 先隐藏全部bar，再显示需要显示的
+        document.querySelector(`.sidebar`).style.left = "-100%";
+        document.querySelector(`.searchbar`).style.left = "-100%";
+        show.sidebar = false;
+        show.searchbar = false;
+
+        document.querySelector(`.${key}`).style.left = "0";
+      }
+      show[key] = !show[key];
+    }
+
+    document.querySelector(".menu").addEventListener("click", changeShow.bind(null, 'sidebar'));
+    document.querySelector(".search").addEventListener("click", changeShow.bind(null, 'searchbar'));
+    document.querySelector(".search-btn").addEventListener("click", () => {
+      const val = encodeURIComponent(document.querySelector(".search-input").value);
+      const xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", function (e) {
+        document.querySelector('.search-result').innerHTML = e.currentTarget.responseText || '未搜索到结果';
       });
-    </script>
-  </body>
+      xhr.open("GET", `http://redleaf.fun/weekly/search?param=${val}`);
+      xhr.send();
+    });
+
+  </script>
+</body>
+
 </html>
+
+<!-- DDOS防御
+  https://blog.csdn.net/feng88724/article/details/51144337
+  https://www.cnblogs.com/azhqiang/p/10231490.html -->
