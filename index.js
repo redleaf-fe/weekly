@@ -43,11 +43,11 @@ function getCache(key, fn) {
 }
 
 function getTempl() {
-  return fs.readFileSync(path.resolve('./index.html')).toString();
+  return fs.readFileSync(path.resolve(__dirname, 'index.html')).toString();
 }
 
 function getYearDir() {
-  return fs.readdirSync(path.resolve('./sidebar')).map((v) => {
+  return fs.readdirSync(path.resolve(__dirname, 'sidebar')).map((v) => {
     const filename = path.basename(v, '.md');
     return filename;
   });
@@ -60,7 +60,7 @@ function getYearDirText() {
 }
 
 function getDateDir(year) {
-  return fs.readdirSync(path.join('./', year)).map((v, k) => {
+  return fs.readdirSync(path.join(__dirname, year)).map((v, k) => {
     const filename = path.basename(v, '.md');
     return filename;
   });
@@ -73,7 +73,7 @@ function getDateDirText(year) {
 }
 
 function getArticle(year, date) {
-  const text = fs.readFileSync(path.join('./', year, date + '.md')).toString();
+  const text = fs.readFileSync(path.join(__dirname,  year, date + '.md')).toString();
   const tree = md.parse(text);
 
   return `<div class="year">${tree[1][2]}</div>${tree
@@ -86,7 +86,7 @@ function getArticle(year, date) {
 }
 
 function getTitle(year, date) {
-  const text = fs.readFileSync(path.join('./', year, date + '.md')).toString();
+  const text = fs.readFileSync(path.join(__dirname,  year, date + '.md')).toString();
   const tree = md.parse(text);
 
   return tree
