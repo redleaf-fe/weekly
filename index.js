@@ -43,11 +43,11 @@ function getCache(key, fn) {
 }
 
 function getTempl() {
-  return fs.readFileSync(path.resolve(__dirname, 'index.html')).toString();
+  return fs.readFileSync(path.join(__dirname, 'index.html')).toString();
 }
 
 function getYearDir() {
-  return fs.readdirSync(path.resolve(__dirname, 'sidebar')).map((v) => {
+  return fs.readdirSync(path.join(__dirname, 'sidebar')).map((v) => {
     const filename = path.basename(v, '.md');
     return filename;
   });
