@@ -232,11 +232,12 @@
       xhr.send();
     });
 
+    const log = new XMLHttpRequest();
+    log.open("GET", `http://redleaf.fun/api/weekly/log`);
+    log.send();
+    
+
   </script>
 </body>
 
 </html>
-
-<!-- DDOS防御
-  https://blog.csdn.net/feng88724/article/details/51144337
-  https://www.cnblogs.com/azhqiang/p/10231490.html -->
